@@ -28,6 +28,7 @@ class _StartUpPage extends State<StartUpPage> {
   DBHelperUser helper =DBHelperUser();
   List<Map<String, dynamic>> getUserFromDB = [];
   String ErrorMsg ='';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +90,9 @@ class _StartUpPage extends State<StartUpPage> {
           onPressed: ()async {
             if(userNameController.text.isNotEmpty&&passwordController.text.isNotEmpty){
               getUserFromDB = await helper.CheckUser(userNameController.text, passwordController.text);
+              print('TESSST ${getUserFromDB.length}');
+              print('TESSST ${userNameController.text}');
+              print('TESSST ${passwordController.text}');
               if(getUserFromDB.isNotEmpty){
                 Navigator.pushNamed(context, '/HomePage');
               }

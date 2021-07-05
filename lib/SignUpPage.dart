@@ -19,7 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController pass_controller = TextEditingController();
   TextEditingController sex_controller = TextEditingController();
   TextEditingController age_controller = TextEditingController();
-  int id = 1;
+  List<Map<String, dynamic>> Test = [];
   List<Map<String, dynamic>> Data = [];
   DBHelperUser helper = DBHelperUser();
   @override
@@ -83,13 +83,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () async {
                       if(username_controller.text.isNotEmpty&&pass_controller.text.isNotEmpty&&age_controller.text.isNotEmpty&&sex_controller.text.isNotEmpty){
                         User user = User(
-                            id: id,
                             name: username_controller.text,
                             password: pass_controller.text,
                             age: int.parse(age_controller.text.toString()),
                             gender: sex_controller.text
                         );
                         await helper.addNewUser(user);
+                        Test = await helper.getAllUsers();
+                        print('TEEERRR ${username_controller.text.length}  and ${pass_controller.text}');
+                        print('TEEEEEST ${Test.length}');
+                        print(Test);
                         Navigator.pushNamed(context, '/');
                       }
                       else{
